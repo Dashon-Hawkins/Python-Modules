@@ -9,9 +9,9 @@ from collections import defaultdict as dd
 class RWScraper(object):
     '''
     Class for grabbing player news from www.rotoworld.com/playernews/nfl/football-player-news
-    for any given day, default is the current day. 
-    Methods: scrape -     If a specific day is to be specified for scraping, 
-                          it should be formatted as a tuple: 
+    for any given day, default is the current day.
+    Methods: scrape -     If a specific day is to be specified for scraping,
+                          it should be formatted as a tuple:
                             (month, day, year)
                           and passed to the scrape method through the date argument.
 
@@ -39,7 +39,7 @@ class RWScraper(object):
         player_info = player_box.select('.player a')
         player_dict['team'] = player_info[1].contents[0]
         player_dict['name'] = player_info[0].contents[0]
-        player_dict['news'] = (player_box.select('p')[0].contents[0], 
+        player_dict['news'] = (player_box.select('p')[0].contents[0],
                                player_box.select('.impact')[0].contents[0])
         return player_dict
 
@@ -57,7 +57,7 @@ class RWScraper(object):
         if self._date[0]:
             date_picker = driver.find_element_by_id('tbDatepicker')
             date_picker.click()
-            date_picker.send_keys('{}/{}/{}'.format(self._date[0], self._date[1], self._date[2]))
+            date_picker.send_keys('{}/{}/{}/{}/{}/{}/{}'.format(self._date[0], self._date[1], self._date[2], self._date[3], self._date[4], self._date[5], self._date[6]))
             driver.find_element_by_id('cp1_ctl00_btnFilterResults').click()
         while self._same_day:
             soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -77,14 +77,14 @@ class RWScraper(object):
                'Falcons':   {'fg': 0, 'bg': 1},
                'Saints':    {'fg': 136, 'bg': 0},
                'Chargers':  {'fg': 226, 'bg': 21},
-               'Lions':     {'fg': 27, 'bg': 244}, 
-               'Cowboys':   {'fg': 244, 'bg': 27}, 
+               'Lions':     {'fg': 27, 'bg': 244},
+               'Cowboys':   {'fg': 244, 'bg': 27},
                'Browns':    {'fg': 202, 'bg': 52},
                'Eagles':    {'fg': 231, 'bg': 29},
-               'Steelers':  {'fg': 11, 'bg': 0}, 
+               'Steelers':  {'fg': 11, 'bg': 0},
                'Giants':    {'fg': 9, 'bg': 19},
                'Patriots':  {'fg': 9, 'bg': 19},
-               'Buccaneers':{'fg': 0, 'bg': 9}, 
+               'Buccaneers':{'fg': 0, 'bg': 9},
                'Cardinals': {'fg': 0, 'bg': 1},
                'Chiefs':    {'fg': 196, 'bg': 0},
                'Jaguars':   {'fg': 11, 'bg': 30},
